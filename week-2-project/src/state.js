@@ -120,6 +120,7 @@ const Ex4 = function () {
 
 const Ex5 = function () {
   const [count, setCount] = useState(0);
+
   return (
     <div>
       <p>{count}</p>
@@ -277,10 +278,22 @@ const Ex10 = function () {
   const [items, setItems] = useState(["docker", "kubernetes"]);
   return (
     <div>
-      <ul>{/* render the items as an li here */}</ul>
+      <ul>
+        {
+          items.map((el) => (
+            <li>{el}</li>
+          ))
+          /* <li>{items[0]}</li>
+        <li>{items[1]}</li> */
+        }
+      </ul>
       <button
         onClick={() => {
-          /* Set the items here */
+          setItems(["docker", "kubernetes", "containerd"]);
+          // let el = document.getElementsByTagName("ul");
+          // let li = document.createElement("li");
+          // li.innerHTML = "containerd";
+          // el.appendChild(li);
         }}
       >
         Add element
@@ -316,12 +329,21 @@ const Ex11 = function () {
     "rhoncizzle",
   ];
   const [items, setItems] = useState([]);
-  const [idx, setIdx] = useState(1);
+  const [idx, setIdx] = useState(0);
   return (
     <div>
-      <ul>{/* render the items as an li here */}</ul>
+      <ul>
+        {
+          items.map((el) => (
+            <li>{el}</li>
+          ))
+          /* render the items as an li here */
+        }
+      </ul>
       <button
         onClick={() => {
+          setItems([...items, default_list[idx]]);
+          setIdx(idx + 1);
           /* update the state here */
         }}
       >
@@ -337,16 +359,24 @@ const Ex11 = function () {
 // Keep the unordered list empty
 // Set the text of the button element to "Add element"
 // Goal
-// Same as previous exercice, but this time the list is passed as a props
+// Same as previous exercise, but this time the list is passed as a props
 
 const Ex12 = function ({ base_list }) {
   const [items, setItems] = useState([]);
-  const [idx, setIdx] = useState(1);
+  const [idx, setIdx] = useState(0);
   return (
     <div>
-      <ul>{/* render the items as an li here */}</ul>
+      <ul>
+        {
+          items.map((el) => (
+            <li>{el}</li>
+          )) /* render the items as an li here */
+        }
+      </ul>
       <button
         onClick={() => {
+          setItems([...items, base_list[idx]]);
+          setIdx(idx + 1);
           /* update the state here */
         }}
       >
@@ -362,7 +392,7 @@ const Ex12 = function ({ base_list }) {
 // Goal
 // On "Add element" button click, a new item is added to the unordered list.
 // On "Remove element" button click, a new item is added to the unordered list.
-// Use the same list as in exercice 11
+// Use the same list as in exercise 11
 
 const Ex13 = function () {
   const default_list = [
@@ -375,12 +405,21 @@ const Ex13 = function () {
     "rhoncizzle",
   ];
   const [items, setItems] = useState([]);
-  const [idx, setIdx] = useState(1);
+  const [idx, setIdx] = useState(0);
   return (
     <div>
-      <ul>{/* render the items as an li here */}</ul>
+      <ul>
+        {
+          items.map((el) => (
+            <li>{el}</li>
+          )) /* render the items as an li here */
+        }
+      </ul>
       <button
         onClick={() => {
+          setItems([...items, default_list[idx]]);
+          setIdx(idx + 1);
+          console.log(...items);
           /* update the state here */
         }}
       >
@@ -388,6 +427,10 @@ const Ex13 = function () {
       </button>
       <button
         onClick={() => {
+          setItems([default_list.slice(0, idx - 1)]);
+          if (idx !== 0) {
+            setIdx(idx - 1);
+          }
           /* update the state here */
         }}
       >
@@ -405,12 +448,18 @@ const Ex13 = function () {
 
 const Ex14 = function ({ base_list }) {
   const [items, setItems] = useState([]);
-  const [idx, setIdx] = useState(1);
+  const [idx, setIdx] = useState(0);
   return (
     <div>
-      <ul>{/* render the items as an li here */}</ul>
+      <ul>
+        {items.map((el) => (
+          <li>{el}</li>
+        ))}
+      </ul>
       <button
         onClick={() => {
+          setItems([...items, base_list[idx]]);
+          setIdx(idx + 1);
           /* update the state here */
         }}
       >
@@ -418,6 +467,8 @@ const Ex14 = function ({ base_list }) {
       </button>
       <button
         onClick={() => {
+          setItems([base_list.slice(0, idx - 1)]);
+          setIdx(idx - 1);
           /* update the state here */
         }}
       >
